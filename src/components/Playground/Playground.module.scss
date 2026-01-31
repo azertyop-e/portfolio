@@ -1,0 +1,21 @@
+.collage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.item {
+  position: absolute;
+  background: var(--bg-soft);
+  overflow: hidden;
+  will-change: transform;
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}

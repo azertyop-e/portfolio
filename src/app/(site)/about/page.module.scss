@@ -1,0 +1,41 @@
+.container {
+  padding: var(--content-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.bio {
+  max-width: 800px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 300;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--muted);
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.servicesSection {
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}

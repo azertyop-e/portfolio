@@ -1,0 +1,22 @@
+.numberRoll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1;
+}
+
+.inner {
+  display: block;
+  position: relative;
+}
+
+.current,
+.next {
+  display: block;
+}
+
+.next {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}

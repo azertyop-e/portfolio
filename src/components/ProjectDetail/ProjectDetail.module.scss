@@ -1,0 +1,285 @@
+// =====================
+// Project Hero
+// =====================
+
+.hero {
+  padding: var(--content-pad);
+  padding-bottom: 60px;
+}
+
+.heroHeader {
+  margin-bottom: 48px;
+}
+
+.heroMeta {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.heroTitle {
+  font-size: clamp(48px, 10vw, 100px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.heroTagline {
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--muted);
+  max-width: 700px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.heroCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.heroCategoryTag {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.heroCover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.heroCoverVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// =====================
+// Project Writeup
+// =====================
+
+.writeup {
+  padding: 60px var(--content-pad);
+  border-top: 1px solid var(--line);
+}
+
+.writeupGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.writeupMain {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.writeupSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @media (max-width: 1024px) {
+    border-top: 1px solid var(--line);
+    padding-top: 48px;
+  }
+}
+
+.writeupSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.writeupLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.writeupText {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--muted);
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.writeupList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    padding-left: 20px;
+    position: relative;
+
+    &::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--line);
+    }
+  }
+}
+
+.writeupListSimple {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  li {
+    font-size: 14px;
+    color: var(--fg);
+  }
+}
+
+.writeupTools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.writeupTool {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 12px;
+  background: var(--bg-soft);
+  border-radius: 4px;
+}
+
+.writeupNote {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+// =====================
+// Project Gallery
+// =====================
+
+.gallery {
+  padding: 60px var(--content-pad);
+  border-top: 1px solid var(--line);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.galleryItem {
+  &:nth-child(3n + 1) {
+    grid-column: span 2;
+
+    @media (max-width: 768px) {
+      grid-column: span 1;
+    }
+  }
+}
+
+.galleryImage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-soft);
+
+  .galleryItem:nth-child(3n + 1) & {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.galleryVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-soft);
+}
+
+.galleryCaption {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+// =====================
+// Project Navigation
+// =====================
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--content-pad);
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.navBack {
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--fg);
+  }
+}
+
+.navNext {
+  text-align: right;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.navNextLabel {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.navNextTitle {
+  font-size: 24px;
+  font-weight: 300;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}

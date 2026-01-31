@@ -1,0 +1,197 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  overflow: hidden;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+}
+
+.progressWrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enterWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.noPointer {
+  pointer-events: none;
+}
+
+// LoadingCounter
+.counter {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+}
+
+.counterText {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+// ProgressCircle
+.progressCircle {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressSvg {
+  transform: rotate(-90deg);
+}
+
+// EnterButton
+.enterButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.circlesWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+.dashedCircle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+.innerCircle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.enterText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  font-weight: 400;
+  text-transform: uppercase;
+  user-select: none;
+  z-index: 10;
+  opacity: 0; // Caché initialement, GSAP l'affichera
+}
+
+// BottomInfo
+.bottomInfo {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  padding: 0 32px;
+  display: flex;
+  align-items: flex-end;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.nameSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.namePrimary {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nameSecondary {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-left: 12vw;
+}
+
+.overviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.overviewLabel {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.overviewValue {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.versionSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.indicators {
+  display: flex;
+  gap: 4px;
+}
+
+.indicatorActive {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.indicatorInactive {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.version {
+  color: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,118 @@
+$corner-size: 6px;
+$corner-thickness: 1px;
+$box-size: 24px;
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.corners {
+  position: relative;
+  width: $box-size;
+  height: $box-size;
+}
+
+.corner {
+  position: absolute;
+  width: $corner-size;
+  height: $corner-size;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: #fff;
+  }
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+
+  &::before {
+    top: 0;
+    left: 0;
+    width: $corner-size;
+    height: $corner-thickness;
+  }
+
+  &::after {
+    top: 0;
+    left: 0;
+    width: $corner-thickness;
+    height: $corner-size;
+  }
+}
+
+.cornerTR {
+  top: 0;
+  right: 0;
+
+  &::before {
+    top: 0;
+    right: 0;
+    width: $corner-size;
+    height: $corner-thickness;
+  }
+
+  &::after {
+    top: 0;
+    right: 0;
+    width: $corner-thickness;
+    height: $corner-size;
+  }
+}
+
+.cornerBL {
+  bottom: 0;
+  left: 0;
+
+  &::before {
+    bottom: 0;
+    left: 0;
+    width: $corner-size;
+    height: $corner-thickness;
+  }
+
+  &::after {
+    bottom: 0;
+    left: 0;
+    width: $corner-thickness;
+    height: $corner-size;
+  }
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+
+  &::before {
+    bottom: 0;
+    right: 0;
+    width: $corner-size;
+    height: $corner-thickness;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    width: $corner-thickness;
+    height: $corner-size;
+  }
+}
+
+.coords {
+  position: absolute;
+  top: calc($box-size + 4px);
+  left: calc($box-size - 4px);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  font-size: 9px;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}

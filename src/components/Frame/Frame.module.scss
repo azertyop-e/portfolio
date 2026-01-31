@@ -1,0 +1,12 @@
+.frame {
+  position: relative;
+  z-index: 1;
+  padding: var(--frame-pad);
+}
+
+.inner {
+  position: relative;
+  border: 1px solid var(--line);
+  min-height: calc(100vh - var(--frame-pad) * 2);
+  background: transparent;
+}
