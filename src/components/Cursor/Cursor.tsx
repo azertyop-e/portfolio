@@ -61,7 +61,8 @@ export function Cursor() {
 
   // Animate cursor size on hover
   useIsomorphicLayoutEffect(() => {
-    if (reducedMotion || isTouch || !cornersRef.current || !coordsRef.current) return;
+    if (reducedMotion || isTouch || !cornersRef.current || !coordsRef.current)
+      return;
 
     const isHover = variant === "action";
     const targetSize = isHover ? BOX_SIZE_HOVER : BOX_SIZE_DEFAULT;

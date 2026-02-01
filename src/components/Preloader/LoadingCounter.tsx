@@ -17,7 +17,7 @@ export const LoadingCounter = forwardRef<HTMLDivElement, LoadingCounterProps>(
         </span>
       </div>
     );
-  }
+  },
 );
 
 LoadingCounter.displayName = "LoadingCounter";

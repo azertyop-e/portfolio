@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PageTransitionLink } from "@/components/PageTransition";
 import { useCursor } from "@/components/Cursor/CursorContext";
 import { PlaygroundCollage } from "@/components/Playground/PlaygroundCollage";
 import { TextRoll } from "@/components/TextRoll/TextRoll";
@@ -13,7 +13,7 @@ export function PlaygroundSection() {
   const handleMouseLeave = () => setVariant("default");
 
   return (
-    <section className={styles.playground}>
+    <section id="playground" className={styles.playground}>
       <div className={styles.playgroundHeader}>
         <h2 className={styles.playgroundTitle}>Playground</h2>
         <p className={styles.playgroundText}>
@@ -22,7 +22,7 @@ export function PlaygroundSection() {
         <p className={styles.playgroundNote}>
           Experiments in typography, motion, and visual exploration
         </p>
-        <Link
+        <PageTransitionLink
           href="/playground"
           className={styles.playgroundLink}
           onMouseEnter={handleMouseEnter}
@@ -39,7 +39,7 @@ export function PlaygroundSection() {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </Link>
+        </PageTransitionLink>
       </div>
 
       <div className={styles.playgroundCollage}>

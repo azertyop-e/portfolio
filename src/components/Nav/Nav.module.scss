@@ -1,19 +1,21 @@
 .nav {
+  position: fixed;
+  top: var(--frame-pad);
+  left: var(--frame-pad);
+  right: var(--frame-pad);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--content-pad);
-  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  mix-blend-mode: difference;
 }
 
 .logo {
   font-size: 14px;
   font-weight: 400;
   letter-spacing: -0.01em;
-
-  &:hover {
-    opacity: 0.7;
-  }
+  color: #fff;
 }
 
 .links {
@@ -23,14 +25,14 @@
 
 .link {
   font-size: 14px;
-  color: var(--muted);
-  transition: color 0.2s ease;
+  color: rgba(255, 255, 255, 0.65);
+  transition: opacity 0.2s ease;
 
   &:hover {
-    color: var(--fg);
+    color: #fff;
   }
 
   &.active {
-    color: var(--fg);
+    color: #fff;
   }
 }

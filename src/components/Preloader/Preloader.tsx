@@ -6,6 +6,10 @@ import { LoadingCounter } from "./LoadingCounter";
 import { ProgressCircle } from "./ProgressCircle";
 import { EnterButton } from "./EnterButton";
 import { BottomInfo } from "./BottomInfo";
+import {
+  IntroTransitionOverlay,
+  IntroTransitionOverlayHandle,
+} from "@/components/IntroTransitionOverlay";
 import styles from "./Preloader.module.scss";
 
 interface PreloaderProps {
@@ -19,6 +23,7 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
   const counterRef = useRef<HTMLDivElement>(null);
   const bottomInfoRef = useRef<HTMLDivElement>(null);
   const progressWrapperRef = useRef<HTMLDivElement>(null);
+  const introTransitionRef = useRef<IntroTransitionOverlayHandle>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showEnterButton, setShowEnterButton] = useState(false);
@@ -27,9 +32,28 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
   const [showReady, setShowReady] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [hideProgressCircle, setHideProgressCircle] = useState(false);
+  const [isIntroTransitionRunning, setIsIntroTransitionRunning] =
+    useState(false);
 
   const strokeWidth = 2;
 
+  // Lock scroll while preloader (or intro overlay) is visible
+  useEffect(() => {
+    if (!isComplete) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isComplete]);
+
+  // Scroll to top when preloader completes (intro already does it; ensure top on full flow end)
+  const handleIntroTransitionComplete = useCallback(() => {
+    window.scrollTo(0, 0);
+    setIsComplete(true);
+    onComplete?.();
+  }, [onComplete]);
 
   // Animation du compteur de 0 à 100
   useEffect(() => {
@@ -41,13 +65,13 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
     gsap.fromTo(
       counterRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
     );
 
     gsap.fromTo(
       bottomInfoRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.2 }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.2 },
     );
 
     gsap.to(counter, {
@@ -59,7 +83,7 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
         setShowReady(true);
         setIsTransitioning(true);
         setShowEnterButton(true);
-        
+
         // Fade out du cercle de chargement
         gsap.to(progressWrapperRef.current, {
           opacity: 0,
@@ -80,10 +104,12 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
     setIsTransitioning(false);
   }, []);
 
-  const handleComplete = useCallback(() => {
-    setIsComplete(true);
-    onComplete?.();
-  }, [onComplete]);
+  // Called when ENTER is clicked - starts the intro transition
+  const handleEnterComplete = useCallback(() => {
+    setIsIntroTransitionRunning(true);
+    // Start the transition animation
+    introTransitionRef.current?.start();
+  }, []);
 
   if (isComplete) {
     return <>{children}</>;
@@ -103,10 +129,7 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
         {/* Cercle de progression au centre */}
         {isLoading && !hideProgressCircle && (
           <div ref={progressWrapperRef} className={styles.progressWrapper}>
-            <ProgressCircle
-              progress={progress}
-              strokeWidth={strokeWidth}
-            />
+            <ProgressCircle progress={progress} strokeWidth={strokeWidth} />
           </div>
         )}
 
@@ -125,7 +148,7 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
             loaderRef={loaderRef}
             counterRef={counterRef}
             bottomInfoRef={bottomInfoRef}
-            onComplete={handleComplete}
+            onComplete={handleEnterComplete}
             onDashedCircleShrinkComplete={runProgressCircleShrink}
           />
         </div>
@@ -133,6 +156,12 @@ export function Preloader({ onComplete, children }: PreloaderProps) {
         {/* Informations en bas */}
         <BottomInfo ref={bottomInfoRef} />
       </div>
+
+      {/* Intro Transition Overlay - appears after ENTER click */}
+      <IntroTransitionOverlay
+        ref={introTransitionRef}
+        onComplete={handleIntroTransitionComplete}
+      />
     </>
   );
 }

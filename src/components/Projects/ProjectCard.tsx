@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PageTransitionLink } from "@/components/PageTransition";
 import Image from "next/image";
 import { useCursor } from "@/components/Cursor/CursorContext";
 import type { Project } from "@/lib/data/projects";
@@ -14,7 +14,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const { setVariant } = useCursor();
 
   return (
-    <Link
+    <PageTransitionLink
       href={`/projects/${project.slug}`}
       className={styles.card}
       onMouseEnter={() => setVariant("action", "VIEW PROJECT")}
@@ -35,6 +35,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <h3 className={styles.cardTitle}>{project.title}</h3>
         <p className={styles.cardRoles}>{project.roles.join(", ")}</p>
       </div>
-    </Link>
+    </PageTransitionLink>
   );
 }

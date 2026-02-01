@@ -24,7 +24,7 @@ export function PlaygroundCollage() {
             x: gsap.quickSetter(el, "x", "px"),
             y: gsap.quickSetter(el, "y", "px"),
           }
-        : null
+        : null,
     );
 
     const handleMouseMove = (e: MouseEvent) => {

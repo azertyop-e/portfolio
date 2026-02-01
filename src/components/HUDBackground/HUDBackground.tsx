@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import styles from "./HUDBackground.module.scss";
 
-// Hook for reduced motion
+// reduced motion
 function useReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
 
@@ -18,7 +18,7 @@ function useReducedMotion(): boolean {
   return reduced;
 }
 
-// Node positions (percentage-based)
+// Node positions
 const nodes = [
   { id: 1, top: "15%", left: "8%" },
   { id: 2, top: "72%", left: "12%" },
@@ -27,21 +27,70 @@ const nodes = [
   { id: 5, top: "45%", left: "92%" },
 ];
 
+// Compilation log lines
+const compileLines = [
+  "$ npm run build",
+  "",
+  "> portfolio@1.0.0 build",
+  "> next build",
+  "",
+  "   ▲ Next.js 14.x",
+  "   - Environments: .env.local",
+  "",
+  "⠋ Compiling...",
+  "✓ Compiled / in 1.2s",
+  "✓ Linting and checking validity of types",
+  "✓ Collecting page data",
+  "  Generating static pages (4/4)",
+  "  /",
+  "  /hud",
+  "  /playground",
+  "  /projects/[slug]",
+  "✓ Finalizing page optimization",
+  "",
+  "Route (app)                Size     First Load JS",
+  "└ ○ /                       12.4 kB        85 kB",
+  "└ ○ /hud                    8.2 kB         82 kB",
+  "",
+  "○  (Static)  prerendered as static content",
+  "",
+  "Done in 2.84s",
+];
+
 type HUDBackgroundProps = {
   watermark?: string;
   minimal?: boolean;
   className?: string;
+  /** ROUTE value in right panel */
+  routeLabel?: string;
 };
 
 export function HUDBackground({
-  watermark = "WORKS",
+  watermark = "PORTFOLIO",
   minimal = false,
   className = "",
+  routeLabel = "—",
 }: HUDBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reducedMotion = useReducedMotion();
   const [time, setTime] = useState("00:00:00");
   const [date, setDate] = useState("01.01.2025");
+  const [compileIndex, setCompileIndex] = useState(0);
+
+  // Sliding window: 5 lines, advance every tick
+  const compileLinesDoubled = [...compileLines, ...compileLines];
+  const visibleCompileLines = compileLinesDoubled.slice(
+    compileIndex,
+    compileIndex + 5,
+  );
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const t = setInterval(() => {
+      setCompileIndex((i) => (i + 1) % compileLines.length);
+    }, 600);
+    return () => clearInterval(t);
+  }, [reducedMotion]);
 
   // Update time
   useEffect(() => {
@@ -52,14 +101,16 @@ export function HUDBackground({
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
-        })
+        }),
       );
       setDate(
-        now.toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        }).replace(/\//g, ".")
+        now
+          .toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+          .replace(/\//g, "."),
       );
     };
     updateTime();
@@ -98,10 +149,10 @@ export function HUDBackground({
 
       for (let i = 0; i < data.length; i += 4) {
         const value = Math.random() * 255;
-        data[i] = value;     // R
+        data[i] = value; // R
         data[i + 1] = value; // G
         data[i + 2] = value; // B
-        data[i + 3] = 25;    // Alpha (low for subtlety)
+        data[i + 3] = 25; // Alpha (low for subtlety)
       }
 
       ctx.putImageData(imageData, 0, 0);
@@ -137,25 +188,21 @@ export function HUDBackground({
   }, [reducedMotion]);
 
   return (
-    <div className={`${styles.hud} ${minimal ? styles.minimal : ""} ${className}`} aria-hidden="true">
-      {/* Base layers */}
+    <div
+      className={`${styles.hud} ${minimal ? styles.minimal : ""} ${className}`}
+      aria-hidden="true"
+    >
       <div className={styles.grid} />
       <div className={styles.scanlines} />
       <canvas ref={canvasRef} className={styles.noise} />
       <div className={styles.vignette} />
-
-      {/* Watermark */}
       <div className={styles.watermark}>{watermark}</div>
-
-      {/* HUD Corners */}
       <div className={styles.corners}>
         <div className={`${styles.corner} ${styles.cornerTL}`} />
         <div className={`${styles.corner} ${styles.cornerTR}`} />
         <div className={`${styles.corner} ${styles.cornerBL}`} />
         <div className={`${styles.corner} ${styles.cornerBR}`} />
       </div>
-
-      {/* Center tick marks */}
       <div className={styles.ticks}>
         <div className={`${styles.tick} ${styles.tickTop}`} />
         <div className={`${styles.tick} ${styles.tickBottom}`} />
@@ -165,7 +212,49 @@ export function HUDBackground({
 
       {!minimal && (
         <>
-          {/* Left HUD Text */}
+          <div className={styles.compileBlock}>
+            <div className={styles.compileTitle}>BUILD</div>
+            <div className={styles.compileLog}>
+              {visibleCompileLines.map((line, i) => (
+                <div key={compileIndex + i} className={styles.compileLine}>
+                  {line}
+                </div>
+              ))}
+            </div>
+            <div className={styles.compileCursorLine}>
+              <span className={styles.compileCursor} aria-hidden="true" />
+            </div>
+          </div>
+
+          <aside className={styles.sidebarLeft}>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>STATUS</span>
+              <span className={styles.sidebarValue}>ACTIVE</span>
+            </div>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>LAYER</span>
+              <span className={styles.sidebarValue}>BACKGROUND</span>
+            </div>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>OPACITY</span>
+              <span className={styles.sidebarValue}>100%</span>
+            </div>
+          </aside>
+          <aside className={styles.sidebarRight}>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>ROUTE</span>
+              <span className={styles.sidebarValue}>{routeLabel}</span>
+            </div>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>VIEW</span>
+              <span className={styles.sidebarValue}>PREVIEW</span>
+            </div>
+            <div className={styles.sidebarBlock}>
+              <span className={styles.sidebarLabel}>FRAME</span>
+              <span className={styles.sidebarValue}>SITE</span>
+            </div>
+          </aside>
+
           <div className={styles.hudTextLeft}>
             <div className={styles.hudLine}>
               <span className={styles.hudLabel}>STATUS</span>
@@ -185,7 +274,6 @@ export function HUDBackground({
             </div>
           </div>
 
-          {/* Right HUD Text */}
           <div className={styles.hudTextRight}>
             <div className={styles.hudLine}>
               <span className={styles.hudLabel}>DISPLAY</span>
@@ -205,7 +293,6 @@ export function HUDBackground({
             </div>
           </div>
 
-          {/* Nodes */}
           <div className={styles.nodes}>
             {nodes.map((node) => (
               <div

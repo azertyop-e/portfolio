@@ -4,6 +4,8 @@ import { Footer } from "@/components/Footer/Footer";
 import { CursorProvider } from "@/components/Cursor/CursorContext";
 import { Cursor } from "@/components/Cursor/Cursor";
 import { SmoothScroll } from "@/components/SmoothScroll/SmoothScroll";
+import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
+import { PageTransitionProvider } from "@/components/PageTransition";
 import { Preloader } from "@/components/Preloader";
 import styles from "./layout.module.scss";
 
@@ -13,17 +15,21 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <CursorProvider>
-      <Preloader>
-        <SmoothScroll>
-          <Cursor />
-          <Frame>
-            <Nav />
-            <main className={styles.main}>{children}</main>
-            <Footer />
-          </Frame>
-        </SmoothScroll>
-      </Preloader>
-    </CursorProvider>
+    <ScrollToTop>
+      <CursorProvider>
+        <PageTransitionProvider>
+          <Preloader>
+            <SmoothScroll>
+              <Cursor />
+              <Frame>
+                <Nav />
+                <main className={styles.main}>{children}</main>
+                <Footer />
+              </Frame>
+            </SmoothScroll>
+          </Preloader>
+        </PageTransitionProvider>
+      </CursorProvider>
+    </ScrollToTop>
   );
 }

@@ -29,7 +29,7 @@ export function Hero() {
             opacity: 0,
             duration: 0.8,
           },
-          "-=0.6"
+          "-=0.6",
         )
         .from(
           ".hero-scroll",
@@ -37,7 +37,7 @@ export function Hero() {
             opacity: 0,
             duration: 0.6,
           },
-          "-=0.3"
+          "-=0.3",
         );
     }, containerRef);
 
@@ -45,7 +45,7 @@ export function Hero() {
   }, [reducedMotion]);
 
   return (
-    <section ref={containerRef} className={styles.hero}>
+    <section ref={containerRef} id="hero" className={styles.hero}>
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>
           <span className={styles.heroLine}>

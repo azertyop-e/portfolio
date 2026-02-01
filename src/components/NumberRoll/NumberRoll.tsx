@@ -10,7 +10,11 @@ type NumberRollProps = {
   className?: string;
 };
 
-export function NumberRoll({ value, pad = 2, className = "" }: NumberRollProps) {
+export function NumberRoll({
+  value,
+  pad = 2,
+  className = "",
+}: NumberRollProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const [displayValue, setDisplayValue] = useState(value);
   const [nextValue, setNextValue] = useState(value);
@@ -46,7 +50,7 @@ export function NumberRoll({ value, pad = 2, className = "" }: NumberRollProps) 
           setDisplayValue(value);
           gsap.set(inner, { y: 0 });
         },
-      }
+      },
     );
   }, [value, displayValue]);
 
@@ -58,10 +62,7 @@ export function NumberRoll({ value, pad = 2, className = "" }: NumberRollProps) 
     <span ref={containerRef} className={`${styles.numberRoll} ${className}`}>
       <span className={styles.inner}>
         <span className={styles.current}>{formattedDisplay}</span>
-        <span
-          className={styles.next}
-          style={{ top: `${-direction * 100}%` }}
-        >
+        <span className={styles.next} style={{ top: `${-direction * 100}%` }}>
           {formattedNext}
         </span>
       </span>

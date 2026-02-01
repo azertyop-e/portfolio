@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { PageTransitionLink } from "@/components/PageTransition";
 import type { Project } from "@/lib/data/projects";
 import styles from "./ProjectDetail.module.scss";
 
@@ -9,13 +11,16 @@ type ProjectNavProps = {
 export function ProjectNav({ nextProject }: ProjectNavProps) {
   return (
     <nav className={styles.nav}>
-      <Link href="/projects" className={styles.navBack}>
+      <PageTransitionLink href="/#projects" className={styles.navBack}>
         ← All Projects
-      </Link>
-      <Link href={`/projects/${nextProject.slug}`} className={styles.navNext}>
+      </PageTransitionLink>
+      <PageTransitionLink
+        href={`/projects/${nextProject.slug}`}
+        className={styles.navNext}
+      >
         <span className={styles.navNextLabel}>Next Project</span>
         <span className={styles.navNextTitle}>{nextProject.title}</span>
-      </Link>
+      </PageTransitionLink>
     </nav>
   );
 }

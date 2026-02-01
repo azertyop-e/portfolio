@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import Link from "next/link";
+import { PageTransitionLink } from "@/components/PageTransition";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -75,80 +75,85 @@ export function HorizontalProjects() {
   }, [updateIndex]);
 
   return (
-    <div ref={wrapperRef} className={styles.carouselWrapper}>
+    <div ref={wrapperRef} id="projects" className={styles.carouselWrapper}>
       <section ref={sectionRef} className={styles.carousel}>
-      {/* Progress indicator */}
-      <div className={styles.carouselProgress}>
-        <NumberRoll value={currentIndex + 1} className={styles.carouselCurrent} />
-        <div className={styles.carouselLine}>
-          <div
-            className={styles.carouselLineFill}
-            style={{ width: `${((currentIndex + 1) / projects.length) * 100}%` }}
+        {/* Progress indicator */}
+        <div className={styles.carouselProgress}>
+          <NumberRoll
+            value={currentIndex + 1}
+            className={styles.carouselCurrent}
           />
-        </div>
-        <span className={styles.carouselTotal}>
-          {String(projects.length).padStart(2, "0")}
-        </span>
-      </div>
-
-      {/* Track */}
-      <div ref={trackRef} className={styles.carouselTrack}>
-        {projects.map((project, index) => (
-          <div key={project.slug} className={styles.slide}>
-            <Link
-              href={`/projects/${project.slug}`}
-              className={styles.slideLink}
-              onMouseEnter={() => setVariant("action", "VIEW PROJECT")}
-              onMouseLeave={() => setVariant("default")}
-            >
-              {/* Background media */}
-              <div className={styles.slideImage}>
-                {project.cover.type === "video" ? (
-                  <video
-                    src={project.cover.src}
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    preload="metadata"
-                    className={styles.slideVideo}
-                  />
-                ) : (
-                  <Image
-                    src={project.cover.src}
-                    alt={project.cover.alt}
-                    fill
-                    priority={index === 0}
-                    sizes="100vw"
-                    quality={100}
-                    style={{ objectFit: "cover" }}
-                  />
-                )}
-                <div className={styles.slideOverlay} />
-              </div>
-
-              {/* Content */}
-              <div className={styles.slideContent}>
-                <span className={styles.slideIndex}>[{project.index}]</span>
-                <h2 className={styles.slideTitle}>{project.title}</h2>
-                <p className={styles.slideRoles}>
-                  {project.clientLine} — {project.year}
-                </p>
-              </div>
-
-              {/* Categories */}
-              <div className={styles.slideCategories}>
-                {project.categories.slice(0, 3).map((category) => (
-                  <span key={category} className={styles.slideCategory}>
-                    {category}
-                  </span>
-                ))}
-              </div>
-            </Link>
+          <div className={styles.carouselLine}>
+            <div
+              className={styles.carouselLineFill}
+              style={{
+                width: `${((currentIndex + 1) / projects.length) * 100}%`,
+              }}
+            />
           </div>
-        ))}
-      </div>
-    </section>
+          <span className={styles.carouselTotal}>
+            {String(projects.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        {/* Track */}
+        <div ref={trackRef} className={styles.carouselTrack}>
+          {projects.map((project, index) => (
+            <div key={project.slug} className={styles.slide}>
+              <PageTransitionLink
+                href={`/projects/${project.slug}`}
+                className={styles.slideLink}
+                onMouseEnter={() => setVariant("action", "VIEW PROJECT")}
+                onMouseLeave={() => setVariant("default")}
+              >
+                {/* Background media */}
+                <div className={styles.slideImage}>
+                  {project.cover.type === "video" ? (
+                    <video
+                      src={project.cover.src}
+                      autoPlay
+                      muted
+                      playsInline
+                      loop
+                      preload="metadata"
+                      className={styles.slideVideo}
+                    />
+                  ) : (
+                    <Image
+                      src={project.cover.src}
+                      alt={project.cover.alt}
+                      fill
+                      priority={index === 0}
+                      sizes="100vw"
+                      quality={100}
+                      style={{ objectFit: "cover" }}
+                    />
+                  )}
+                  <div className={styles.slideOverlay} />
+                </div>
+
+                {/* Content */}
+                <div className={styles.slideContent}>
+                  <span className={styles.slideIndex}>[{project.index}]</span>
+                  <h2 className={styles.slideTitle}>{project.title}</h2>
+                  <p className={styles.slideRoles}>
+                    {project.clientLine} — {project.year}
+                  </p>
+                </div>
+
+                {/* Categories */}
+                <div className={styles.slideCategories}>
+                  {project.categories.slice(0, 3).map((category) => (
+                    <span key={category} className={styles.slideCategory}>
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </PageTransitionLink>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

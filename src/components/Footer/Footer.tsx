@@ -1,15 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import { PageTransitionLink } from "@/components/PageTransition";
 import { useCursor } from "@/components/Cursor/CursorContext";
 import { TextRoll } from "@/components/TextRoll/TextRoll";
 import styles from "./Footer.module.scss";
 
 const footerLinks = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
+  { href: "/#projects", label: "Projects" },
   { href: "/playground", label: "Playground" },
-  { href: "/about", label: "About" },
+  { href: "/#about", label: "About" },
 ];
 
 const socialLinks = [
@@ -32,17 +32,15 @@ export function Footer() {
         {/* Top section */}
         <div className={styles.top}>
           <div className={styles.brand}>
-            <Link
+            <PageTransitionLink
               href="/"
               className={styles.logo}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
               <TextRoll>Eliott Muller</TextRoll>
-            </Link>
-            <p className={styles.tagline}>
-              Art Direction & Visual Design
-            </p>
+            </PageTransitionLink>
+            <p className={styles.tagline}>Art Direction & Visual Design</p>
           </div>
 
           <div className={styles.links}>
@@ -51,14 +49,14 @@ export function Footer() {
               <ul className={styles.linkList}>
                 {footerLinks.map((link) => (
                   <li key={link.href}>
-                    <Link
+                    <PageTransitionLink
                       href={link.href}
                       className={styles.link}
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
                       <TextRoll>{link.label}</TextRoll>
-                    </Link>
+                    </PageTransitionLink>
                   </li>
                 ))}
               </ul>
@@ -107,9 +105,7 @@ export function Footer() {
           <p className={styles.copyright}>
             © {currentYear} Eliott Muller. All rights reserved.
           </p>
-          <p className={styles.credit}>
-            Designed & Built with passion
-          </p>
+          <p className={styles.credit}>Designed & Built with passion</p>
         </div>
       </div>
     </footer>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCursor } from "@/components/Cursor/CursorContext";
@@ -40,7 +39,10 @@ export function AboutSection() {
         // Split title into words for animation
         const words = title.innerText.split(" ");
         title.innerHTML = words
-          .map((word) => `<span class="${styles.aboutWord}"><span>${word}</span></span>`)
+          .map(
+            (word) =>
+              `<span class="${styles.aboutWord}"><span>${word}</span></span>`,
+          )
           .join(" ");
 
         const wordSpans = title.querySelectorAll(`.${styles.aboutWord} > span`);
@@ -74,7 +76,7 @@ export function AboutSection() {
             ease: "power3.out",
             stagger: 0.05,
           },
-          "-=0.3"
+          "-=0.3",
         );
 
         // Animate content
@@ -86,7 +88,7 @@ export function AboutSection() {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.4",
         );
       }, section);
     }, 300);
@@ -100,7 +102,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.about}>
+    <section ref={sectionRef} id="about" className={styles.about}>
       <div className={styles.aboutHeader}>
         <div className={styles.aboutIntro}>
           <span ref={labelRef} className={styles.aboutLabel}>
@@ -119,13 +121,13 @@ export function AboutSection() {
             combines strategic thinking with meticulous craft, ensuring every
             project receives the same level of attention and care.
           </p>
-          <Link
-            href="/about"
+          <a
+            href="mailto:hello@eliottmuller.com"
             className={styles.aboutLink}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            Learn More
+            Get in Touch
             <svg
               width="16"
               height="16"
@@ -136,7 +138,7 @@ export function AboutSection() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
 

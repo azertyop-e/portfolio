@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { projects, getProjectBySlug, getNextProject } from "@/lib/data/projects";
+import {
+  projects,
+  getProjectBySlug,
+  getNextProject,
+} from "@/lib/data/projects";
 import { ProjectHero } from "@/components/ProjectDetail/ProjectHero";
 import { ProjectGallery } from "@/components/ProjectDetail/ProjectGallery";
 import { ProjectWriteup } from "@/components/ProjectDetail/ProjectWriteup";

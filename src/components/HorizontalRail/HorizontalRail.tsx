@@ -27,7 +27,8 @@ export function HorizontalRail({ children }: HorizontalRailProps) {
     if (!container || !track) return;
 
     const ctx = gsap.context(() => {
-      const getScrollAmount = () => -(track.scrollWidth - container.clientWidth);
+      const getScrollAmount = () =>
+        -(track.scrollWidth - container.clientWidth);
 
       gsap.to(track, {
         x: getScrollAmount,

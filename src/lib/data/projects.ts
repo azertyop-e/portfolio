@@ -16,7 +16,13 @@ export type WorkCategory =
 
 export type MediaItem =
   | { type: "image"; src: string; alt: string; caption?: string }
-  | { type: "video"; src: string; alt: string; caption?: string; poster?: string };
+  | {
+      type: "video";
+      src: string;
+      alt: string;
+      caption?: string;
+      poster?: string;
+    };
 
 export type ProjectWriteup = {
   tagline: string;
@@ -74,7 +80,11 @@ export const projects: Project[] = [
     title: "Techunter",
     clientLine: "Brand Identity",
     year: "2024",
-    categories: ["Branding / Visual Identity", "Art Direction", "Editorial Design"],
+    categories: [
+      "Branding / Visual Identity",
+      "Art Direction",
+      "Editorial Design",
+    ],
     roles: ["Art Direction", "Brand Identity", "Editorial Design"],
     cover: {
       src: "/projects/techunter/cover.jpg",
@@ -82,13 +92,41 @@ export const projects: Project[] = [
       type: "image",
     },
     gallery: [
-      { type: "image", src: "/projects/techunter/01.jpg", alt: "Techunter logo lockup" },
-      { type: "image", src: "/projects/techunter/02.jpg", alt: "Techunter typography system" },
-      { type: "image", src: "/projects/techunter/03.jpg", alt: "Techunter visual identity" },
-      { type: "image", src: "/projects/techunter/04.jpg", alt: "Techunter brand applications" },
-      { type: "image", src: "/projects/techunter/05.jpg", alt: "Techunter editorial design" },
-      { type: "image", src: "/projects/techunter/06.jpg", alt: "Techunter print collateral" },
-      { type: "image", src: "/projects/techunter/07.jpg", alt: "Techunter brand guidelines" },
+      {
+        type: "image",
+        src: "/projects/techunter/01.jpg",
+        alt: "Techunter logo lockup",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/02.jpg",
+        alt: "Techunter typography system",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/03.jpg",
+        alt: "Techunter visual identity",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/04.jpg",
+        alt: "Techunter brand applications",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/05.jpg",
+        alt: "Techunter editorial design",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/06.jpg",
+        alt: "Techunter print collateral",
+      },
+      {
+        type: "image",
+        src: "/projects/techunter/07.jpg",
+        alt: "Techunter brand guidelines",
+      },
     ],
     writeup: {
       tagline: "A bold identity for tomorrow's tech talent hunters.",
@@ -134,12 +172,36 @@ export const projects: Project[] = [
       type: "image",
     },
     gallery: [
-      { type: "image", src: "/projects/nike-acg/01.jpg", alt: "Nike ACG hero visual" },
-      { type: "image", src: "/projects/nike-acg/02.jpg", alt: "Nike ACG product photography" },
-      { type: "image", src: "/projects/nike-acg/03.jpg", alt: "Nike ACG campaign layout" },
-      { type: "image", src: "/projects/nike-acg/04.jpg", alt: "Nike ACG editorial spread" },
-      { type: "image", src: "/projects/nike-acg/05.jpg", alt: "Nike ACG lookbook design" },
-      { type: "image", src: "/projects/nike-acg/06.jpg", alt: "Nike ACG brand application" },
+      {
+        type: "image",
+        src: "/projects/nike-acg/01.jpg",
+        alt: "Nike ACG hero visual",
+      },
+      {
+        type: "image",
+        src: "/projects/nike-acg/02.jpg",
+        alt: "Nike ACG product photography",
+      },
+      {
+        type: "image",
+        src: "/projects/nike-acg/03.jpg",
+        alt: "Nike ACG campaign layout",
+      },
+      {
+        type: "image",
+        src: "/projects/nike-acg/04.jpg",
+        alt: "Nike ACG editorial spread",
+      },
+      {
+        type: "image",
+        src: "/projects/nike-acg/05.jpg",
+        alt: "Nike ACG lookbook design",
+      },
+      {
+        type: "image",
+        src: "/projects/nike-acg/06.jpg",
+        alt: "Nike ACG brand application",
+      },
     ],
     writeup: {
       tagline: "Where urban exploration meets alpine performance.",
@@ -185,12 +247,36 @@ export const projects: Project[] = [
       type: "image",
     },
     gallery: [
-      { type: "image", src: "/projects/black-crows/01.jpg", alt: "Black Crows brand exploration" },
-      { type: "image", src: "/projects/black-crows/02.jpg", alt: "Black Crows ski collection" },
-      { type: "image", src: "/projects/black-crows/03.jpg", alt: "Black Crows product showcase" },
-      { type: "image", src: "/projects/black-crows/04.jpg", alt: "Black Crows editorial layout" },
-      { type: "image", src: "/projects/black-crows/05.jpg", alt: "Black Crows campaign visual" },
-      { type: "image", src: "/projects/black-crows/06.jpg", alt: "Black Crows brand application" },
+      {
+        type: "image",
+        src: "/projects/black-crows/01.jpg",
+        alt: "Black Crows brand exploration",
+      },
+      {
+        type: "image",
+        src: "/projects/black-crows/02.jpg",
+        alt: "Black Crows ski collection",
+      },
+      {
+        type: "image",
+        src: "/projects/black-crows/03.jpg",
+        alt: "Black Crows product showcase",
+      },
+      {
+        type: "image",
+        src: "/projects/black-crows/04.jpg",
+        alt: "Black Crows editorial layout",
+      },
+      {
+        type: "image",
+        src: "/projects/black-crows/05.jpg",
+        alt: "Black Crows campaign visual",
+      },
+      {
+        type: "image",
+        src: "/projects/black-crows/06.jpg",
+        alt: "Black Crows brand application",
+      },
     ],
     writeup: {
       tagline: "Freeride spirit, refined aesthetics.",
@@ -236,12 +322,36 @@ export const projects: Project[] = [
       type: "image",
     },
     gallery: [
-      { type: "image", src: "/projects/oakley/01.jpg", alt: "Oakley product render" },
-      { type: "image", src: "/projects/oakley/02.jpg", alt: "Oakley campaign visual" },
-      { type: "image", src: "/projects/oakley/03.jpg", alt: "Oakley 3D exploration" },
-      { type: "image", src: "/projects/oakley/04.jpg", alt: "Oakley brand application" },
-      { type: "image", src: "/projects/oakley/05.jpg", alt: "Oakley editorial design" },
-      { type: "image", src: "/projects/oakley/06.jpg", alt: "Oakley visual identity" },
+      {
+        type: "image",
+        src: "/projects/oakley/01.jpg",
+        alt: "Oakley product render",
+      },
+      {
+        type: "image",
+        src: "/projects/oakley/02.jpg",
+        alt: "Oakley campaign visual",
+      },
+      {
+        type: "image",
+        src: "/projects/oakley/03.jpg",
+        alt: "Oakley 3D exploration",
+      },
+      {
+        type: "image",
+        src: "/projects/oakley/04.jpg",
+        alt: "Oakley brand application",
+      },
+      {
+        type: "image",
+        src: "/projects/oakley/05.jpg",
+        alt: "Oakley editorial design",
+      },
+      {
+        type: "image",
+        src: "/projects/oakley/06.jpg",
+        alt: "Oakley visual identity",
+      },
     ],
     writeup: {
       tagline: "Performance optics through a futuristic lens.",
@@ -287,11 +397,31 @@ export const projects: Project[] = [
       type: "video",
     },
     gallery: [
-      { type: "image", src: "/projects/circa/01.png", alt: "Circa typography exploration" },
-      { type: "image", src: "/projects/circa/02.png", alt: "Circa letterforms" },
-      { type: "video", src: "/projects/circa/03.mp4", alt: "Circa motion study 1" },
-      { type: "video", src: "/projects/circa/04.mp4", alt: "Circa motion study 2" },
-      { type: "video", src: "/projects/circa/05.mp4", alt: "Circa animated typography" },
+      {
+        type: "image",
+        src: "/projects/circa/01.png",
+        alt: "Circa typography exploration",
+      },
+      {
+        type: "image",
+        src: "/projects/circa/02.png",
+        alt: "Circa letterforms",
+      },
+      {
+        type: "video",
+        src: "/projects/circa/03.mp4",
+        alt: "Circa motion study 1",
+      },
+      {
+        type: "video",
+        src: "/projects/circa/04.mp4",
+        alt: "Circa motion study 2",
+      },
+      {
+        type: "video",
+        src: "/projects/circa/05.mp4",
+        alt: "Circa animated typography",
+      },
     ],
     writeup: {
       tagline: "Typography in motion, letterforms alive.",
@@ -337,7 +467,9 @@ export function getPrevProject(currentSlug: string): Project {
   return projects[(currentIndex - 1 + projects.length) % projects.length];
 }
 
-export function filterProjectsByCategory(category: WorkCategory | "All"): Project[] {
+export function filterProjectsByCategory(
+  category: WorkCategory | "All",
+): Project[] {
   if (category === "All") return projects;
   return projects.filter((p) => p.categories.includes(category));
 }

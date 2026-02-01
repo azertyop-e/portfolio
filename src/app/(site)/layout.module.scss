@@ -1,3 +1,4 @@
 .main {
-  // Removed flex to allow ScrollTrigger pin to work properly
+  // ScrollTrigger pin
+  padding-top: var(--nav-height);
 }

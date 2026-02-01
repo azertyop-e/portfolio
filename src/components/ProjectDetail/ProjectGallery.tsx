@@ -40,9 +40,7 @@ function GalleryItem({ item }: { item: MediaItem }) {
           style={{ objectFit: "cover" }}
         />
       </div>
-      {item.caption && (
-        <p className={styles.galleryCaption}>{item.caption}</p>
-      )}
+      {item.caption && <p className={styles.galleryCaption}>{item.caption}</p>}
     </div>
   );
 }

@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, useCallback, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+  useEffect,
+} from "react";
 import { usePathname } from "next/navigation";
 
 export type CursorVariant = "default" | "action" | "hidden";

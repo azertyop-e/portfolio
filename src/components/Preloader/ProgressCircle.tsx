@@ -53,7 +53,7 @@ export const ProgressCircle = forwardRef<HTMLDivElement, ProgressCircleProps>(
         </svg>
       </div>
     );
-  }
+  },
 );
 
 ProgressCircle.displayName = "ProgressCircle";

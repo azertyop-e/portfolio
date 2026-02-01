@@ -8,7 +8,7 @@ export const BottomInfo = forwardRef<HTMLDivElement>((props, ref) => {
     <div ref={ref} className={styles.bottomInfo}>
       {/* Nom */}
       <div className={styles.nameSection}>
-        <span className={styles.namePrimary}>AMINE ZEGMOU</span>
+        <span className={styles.namePrimary}>ELIOTT MULLER</span>
         <span className={styles.nameSecondary}>PORTFOLIO</span>
       </div>
 

@@ -17,10 +17,10 @@ interface EnterButtonProps {
 
 // Tailles en vw
 const PROGRESS_CIRCLE_SIZE = "20vw"; // Taille initiale du cercle de chargement
-const INNER_CIRCLE_SIZE = "17vw";    // Cercle plein - état normal
-const DASHED_CIRCLE_SIZE = "15vw";   // Cercle dash - état normal
-const INNER_CIRCLE_HOVER = "15vw";   // Cercle plein - hover
-const DASHED_CIRCLE_HOVER = "20vw";  // Cercle dash - hover
+const INNER_CIRCLE_SIZE = "17vw"; // Cercle plein - état normal
+const DASHED_CIRCLE_SIZE = "15vw"; // Cercle dash - état normal
+const INNER_CIRCLE_HOVER = "15vw"; // Cercle plein - hover
+const DASHED_CIRCLE_HOVER = "20vw"; // Cercle dash - hover
 
 export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
   (
@@ -34,7 +34,7 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
       onComplete,
       onDashedCircleShrinkComplete,
     },
-    ref
+    ref,
   ) => {
     const innerCircleRef = useRef<HTMLDivElement>(null);
     const dashedCircleRef = useRef<HTMLDivElement>(null);
@@ -46,8 +46,10 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
     const [hasShrunk, setHasShrunk] = useState(false);
 
     // Tailles initiales (pendant le chargement, on utilise la taille du progress circle)
-    const innerSize = isTransitioning && !hasShrunk ? PROGRESS_CIRCLE_SIZE : INNER_CIRCLE_SIZE;
-    const dashedSize = isTransitioning && !hasShrunk ? PROGRESS_CIRCLE_SIZE : DASHED_CIRCLE_SIZE;
+    const innerSize =
+      isTransitioning && !hasShrunk ? PROGRESS_CIRCLE_SIZE : INNER_CIRCLE_SIZE;
+    const dashedSize =
+      isTransitioning && !hasShrunk ? PROGRESS_CIRCLE_SIZE : DASHED_CIRCLE_SIZE;
 
     // Callback mémorisé pour éviter les re-renders
     const handleShrinkComplete = useCallback(() => {
@@ -63,14 +65,14 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
       gsap.fromTo(
         innerCircleRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.4, ease: "power2.out" }
+        { opacity: 1, duration: 0.4, ease: "power2.out" },
       );
       gsap.fromTo(
         dashedCircleRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.4, ease: "power2.out" }
+        { opacity: 1, duration: 0.4, ease: "power2.out" },
       );
-      
+
       // Rotation continue du cercle dash
       rotationTweenRef.current = gsap.to(dashedCircleRef.current, {
         rotation: 360,
@@ -109,11 +111,11 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
           // Afficher le texte après la réduction
           if (textRef.current) {
             gsap.set(textRef.current, { opacity: 0, scale: 0.8 });
-            gsap.to(textRef.current, { 
-              opacity: 1, 
-              scale: 1, 
-              duration: 0.4, 
-              ease: "power2.out" 
+            gsap.to(textRef.current, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out",
             });
           }
         },
@@ -163,41 +165,31 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
         },
       });
 
+      // Fade out tous les éléments ensemble
       tl.to([counterRef.current, bottomInfoRef.current], {
         opacity: 0,
         y: -20,
-        duration: 0.3,
+        duration: 0.4,
         ease: "power2.in",
       })
         .to(
           textRef.current,
-          { opacity: 0, scale: 0.8, duration: 0.3, ease: "power2.in" },
-          "-=0.2"
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          "-=0.3",
         )
         .to(
-          innerCircleRef.current,
+          [innerCircleRef.current, dashedCircleRef.current],
           {
-            scale: 20,
             opacity: 0,
-            duration: 1.2,
-            ease: "power3.inOut",
+            duration: 0.4,
+            ease: "power2.in",
           },
-          "-=0.1"
-        )
-        .to(
-          dashedCircleRef.current,
-          {
-            scale: 2,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.inOut",
-          },
-          "-=1"
+          "-=0.2",
         )
         .to(
           loaderRef.current,
-          { opacity: 0, duration: 0.4, ease: "power2.out" },
-          "-=0.3"
+          { opacity: 0, duration: 0.3, ease: "power2.out" },
+          "-=0.1",
         );
     };
 
@@ -241,15 +233,12 @@ export const EnterButton = forwardRef<HTMLDivElement, EnterButtonProps>(
             }}
           />
         </div>
-        <span
-          ref={textRef}
-          className={styles.enterText}
-        >
+        <span ref={textRef} className={styles.enterText}>
           Enter
         </span>
       </div>
     );
-  }
+  },
 );
 
 EnterButton.displayName = "EnterButton";
